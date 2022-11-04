@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:Mini_Project_Reading_Novel/screens/widgets/detailview.dart';
+import 'package:mini_Project_Reading_Novel/screens/detailview.dart';
 import '../../models/novelModeldata.dart';
 
 class DaftarNovel extends StatefulWidget {

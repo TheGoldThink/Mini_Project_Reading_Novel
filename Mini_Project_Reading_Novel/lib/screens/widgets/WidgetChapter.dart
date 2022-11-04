@@ -3,7 +3,7 @@
 // ignore_for_file: file_names, must_be_immutable
 
 import 'package:flutter/material.dart';
-import 'package:Mini_Project_Reading_Novel/screens/ReadNovelScreen.dart';
+import 'package:mini_Project_Reading_Novel/screens/ReadNovelScreen.dart';
 
 class ChapterViewWidget extends StatelessWidget {
   String judul, image;

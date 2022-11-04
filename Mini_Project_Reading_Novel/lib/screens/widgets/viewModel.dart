@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:Mini_Project_Reading_Novel/screens/widgets/novel.dart';
+import 'package:mini_Project_Reading_Novel/screens/widgets/novel.dart';
 import '../../service/providers/provider.dart';
 import 'package:provider/provider.dart';
 

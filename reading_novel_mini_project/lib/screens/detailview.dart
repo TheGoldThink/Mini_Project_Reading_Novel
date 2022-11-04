@@ -1,6 +1,8 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'package:flutter/material.dart';
-import 'package:Mini_Project_Reading_Novel/screens/widgets/WidgetBook.dart';
-import 'package:Mini_Project_Reading_Novel/screens/widgets/WidgetChapter.dart';
+import 'package:reading_novel_mini_project/screens/widgets/WidgetBook.dart';
+import 'package:reading_novel_mini_project/screens/widgets/WidgetChapter.dart';
 
 // ignore: must_be_immutable
 class DetailView extends StatefulWidget {

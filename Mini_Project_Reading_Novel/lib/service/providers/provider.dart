@@ -1,8 +1,7 @@
-// ignore_for_file: file_names, camel_case_types
-
 import 'package:flutter/foundation.dart';
 import '../../models/novelModeldata.dart';
 import '../database/mongodb.dart';
+import '../../models/user_model.dart';
 
 enum novelState {
   none,
@@ -13,6 +12,7 @@ enum novelState {
 class Novels with ChangeNotifier {
   novelState _state = novelState.none;
   List<IsiNovel> datanov = [];
+  List<User_model> dataUser = [];
 
   Novels() {
     _fetchnovel();
@@ -29,6 +29,7 @@ class Novels with ChangeNotifier {
     changeState(novelState.loading);
     try {
       datanov = await mongoDatabase.getNovel();
+      dataUser = await mongoDatabase.getuser();
       changeState(novelState.none);
     } catch (error) {
       changeState(novelState.error);

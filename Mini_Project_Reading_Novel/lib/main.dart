@@ -1,7 +1,9 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'package:flutter/material.dart';
-import 'package:Mini_Project_Reading_Novel/screens/homepage.dart';
-import 'package:Mini_Project_Reading_Novel/service/database/mongodb.dart';
-import 'package:Mini_Project_Reading_Novel/service/providers/provider.dart';
+import 'package:mini_Project_Reading_Novel/screens/homepage.dart';
+import 'package:mini_Project_Reading_Novel/service/database/mongodb.dart';
+import 'package:mini_Project_Reading_Novel/service/providers/provider.dart';
 import 'package:provider/provider.dart';
 
 Future<void> main() async {
@@ -22,10 +24,12 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-        providers: [ChangeNotifierProvider(create: (context) => Novels())],
-        child: MaterialApp(
-          title: 'Flutter Demo',
-          home: const HomeScreen(),
+        providers: [
+          ChangeNotifierProvider(create: (context) => Novels()),
+        ],
+        child: const MaterialApp(
+          title: 'Mini Project',
+          home: HomeScreen(),
         ));
   }
 }

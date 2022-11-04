@@ -1,10 +1,10 @@
-// ignore_for_file: file_names
+// ignore_for_file: file_names, depend_on_referenced_packages
 
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:Mini_Project_Reading_Novel/screens/ProfileScreens.dart';
-import 'package:Mini_Project_Reading_Novel/screens/favorite_screens.dart';
-import 'package:Mini_Project_Reading_Novel/screens/widgets/viewModel.dart';
+import 'package:mini_Project_Reading_Novel/screens/ProfileScreens.dart';
+import 'package:mini_Project_Reading_Novel/screens/favorite_screens.dart';
+import 'package:mini_Project_Reading_Novel/screens/widgets/viewModel.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
