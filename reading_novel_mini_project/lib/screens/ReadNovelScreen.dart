@@ -58,8 +58,8 @@ class _ReadNovelState extends State<ReadNovel> {
                             30), //change border radius of this beautiful button thanks to BorderRadius.circular function
                       ),
                     ),
-                    icon: Icon(Icons.home),
-                    label: Text("Back to Tittle")),
+                    icon: const Icon(Icons.home),
+                    label: const Text("Back to Tittle")),
                 Row(
                   children: <Widget>[
                     ElevatedButton.icon(

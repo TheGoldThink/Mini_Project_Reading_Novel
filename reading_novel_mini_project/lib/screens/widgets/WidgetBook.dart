@@ -28,89 +28,95 @@ class WidgetBook extends StatefulWidget {
 }
 
 class _WidgetBookState extends State<WidgetBook> {
+  late Box<Favorite> favbox;
   @override
-  void dispose() {
-    Hive.close();
-
-    super.dispose();
+  void initState() {
+    super.initState();
+    favbox = Boxes.getTransactions();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Flex(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        direction: Axis.horizontal,
-        children: <Widget>[
-          Expanded(
-              flex: 1,
-              child: Column(
-                children: <Widget>[
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                        margin: EdgeInsets.only(top: widget.tmpt.height * .04),
-                        padding: const EdgeInsets.only(left: 10, right: 10),
-                        decoration: BoxDecoration(
-                          color: Colors.transparent,
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.transparent),
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => ReadNovel(
-                                          index: 0,
-                                          novel: widget.novel,
-                                          gambar: widget.gambar,
-                                        )));
-                          },
-                          child: const Text(
-                            "Read Now",
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                  ElevatedButton.icon(
-                    icon: const Icon(
-                      Icons.favorite_border,
-                      size: 20,
-                      color: Colors.white,
-                    ),
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.transparent),
-                    label: const Text("Add To Favorite"),
-                    onPressed: () async {
-                      final favor = Favorite(widget.judul, widget.sinopsis,
-                          widget.gambar, widget.genre, widget.novel);
-                      await Provider.of<Novels>(context, listen: false)
-                          .addFavorite(favor);
-                    },
-                  ),
-                ],
-              )),
-          Expanded(
-              flex: 1,
-              child: Container(
-                color: Colors.transparent,
-                child: Image.network(
-                  widget.gambar,
-                  height: double.infinity,
-                  alignment: Alignment.topRight,
-                  fit: BoxFit.fitWidth,
+    return Flex(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      direction: Axis.horizontal,
+      children: <Widget>[
+        Expanded(
+            flex: 1,
+            child: Column(
+              children: <Widget>[
+                const SizedBox(
+                  height: 20,
                 ),
-              )),
-        ],
-      ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                      margin: EdgeInsets.only(top: widget.tmpt.height * .04),
+                      padding: const EdgeInsets.only(left: 10, right: 10),
+                      decoration: BoxDecoration(
+                        color: Colors.transparent,
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.transparent),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ReadNovel(
+                                        index: 0,
+                                        novel: widget.novel,
+                                        gambar: widget.gambar,
+                                      )));
+                        },
+                        child: const Text(
+                          "Read Now",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+                ElevatedButton.icon(
+                  icon: Icon(
+                    Icons.favorite_border,
+                    size: 20,
+                    color: favbox.containsKey(widget.judul)
+                        ? Colors.red
+                        : Colors.white,
+                  ),
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.transparent),
+                  label: favbox.containsKey(widget.judul)
+                      ? const Text("Remove Favorite",
+                          style: TextStyle(color: Colors.red))
+                      : const Text(
+                          "Add To Favorite",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                  onPressed: () async {
+                    final favor = Favorite(widget.judul, widget.sinopsis,
+                        widget.gambar, widget.genre, widget.novel);
+                    await Provider.of<Novels>(context, listen: false)
+                        .addFavorite(favor);
+                  },
+                ),
+              ],
+            )),
+        Expanded(
+            flex: 1,
+            child: Container(
+              color: Colors.transparent,
+              child: Image.network(
+                widget.gambar,
+                height: double.infinity,
+                alignment: Alignment.topRight,
+                fit: BoxFit.fitWidth,
+              ),
+            )),
+      ],
     );
   }
 }

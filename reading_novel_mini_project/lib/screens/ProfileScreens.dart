@@ -1,7 +1,8 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reading_novel_mini_project/screens/editScreen.dart';
-import 'package:reading_novel_mini_project/screens/homepage.dart';
 import 'package:reading_novel_mini_project/service/providers/provider.dart';
 
 class ProfileScreens extends StatefulWidget {
@@ -49,7 +50,8 @@ class _ProfileScreensState extends State<ProfileScreens> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => editScreen(),
+                                          builder: (context) =>
+                                              const editScreen(),
                                           settings: RouteSettings(
                                               arguments: profile[0])),
                                     );
@@ -214,7 +216,7 @@ class _ProfileScreensState extends State<ProfileScreens> {
                                       height: 10,
                                     ),
                                     Container(
-                                      height: height * 0.15,
+                                      height: height * 0.10,
                                       decoration: const BoxDecoration(),
                                       child: Text(
                                         profile[0].about,

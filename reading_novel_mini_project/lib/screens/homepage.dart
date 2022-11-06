@@ -42,11 +42,6 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
   @override
   Widget build(BuildContext context) {
-    if (box == null) {
-      return Center(
-        child: CircularProgressIndicator(),
-      );
-    }
     return Scaffold(
       extendBody: true,
       key: navigationkey,

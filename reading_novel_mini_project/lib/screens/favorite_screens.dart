@@ -3,6 +3,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:reading_novel_mini_project/boxes.dart';
 import 'package:reading_novel_mini_project/models/favor.dart';
 import 'package:reading_novel_mini_project/screens/detailview.dart';
+import 'package:cool_alert/cool_alert.dart';
 
 class FavoriteScreens extends StatefulWidget {
   const FavoriteScreens({super.key});
@@ -13,13 +14,9 @@ class FavoriteScreens extends StatefulWidget {
 
 class _FavoriteScreensState extends State<FavoriteScreens> {
   var box = Hive.openBox<Favorite>('favorite');
+
   @override
   Widget build(BuildContext context) {
-    if (box == null) {
-      return Center(
-        child: CircularProgressIndicator(),
-      );
-    }
     return Scaffold(
         extendBody: true,
         body: ValueListenableBuilder<Box<Favorite>>(
@@ -35,15 +32,19 @@ class _FavoriteScreensState extends State<FavoriteScreens> {
     if (favo.isEmpty) {
       return const Center(
         child: Text(
-          'Belum ada yang ditambahkan',
-          style: TextStyle(fontSize: 24),
+          'Empty\n Data',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 34,
+            fontFamily: 'Nisebuschgardens',
+          ),
         ),
       );
     } else {
       return SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
           child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 50),
+              padding: const EdgeInsets.symmetric(vertical: 50),
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -60,6 +61,7 @@ class _FavoriteScreensState extends State<FavoriteScreens> {
                       ),
                     ),
                     ListView.builder(
+                      physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       itemCount: favo.length,
                       itemBuilder: (context, index) {
@@ -76,14 +78,41 @@ class _FavoriteScreensState extends State<FavoriteScreens> {
                             ),
                           ),
                           onDismissed: ((direction) {
-                            favo[index].delete();
+                            CoolAlert.show(
+                              context: context,
+                              type: CoolAlertType.confirm,
+                              text: "Yakin mau Delete?",
+                              confirmBtnText: "Yes",
+                              cancelBtnText: "Bring Back",
+                              onConfirmBtnTap: () {
+                                favo[index].delete();
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text(
+                                      'Data Telah Dihapus...',
+                                    ),
+                                  ),
+                                );
+                                Navigator.pop(context);
+                              },
+                              onCancelBtnTap: () {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text(
+                                      'Data akan dikembalikan ketika anda kembali...',
+                                    ),
+                                  ),
+                                );
+                                Navigator.pop(context);
+                              },
+                            );
                           }),
                           key: ObjectKey(bb),
                           child: InkWell(
-                            child: Container(
+                            child: SizedBox(
                               height: 80,
                               child: Card(
-                                elevation: 9,
+                                elevation: 12,
                                 shape: const RoundedRectangleBorder(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(30)),
