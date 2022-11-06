@@ -2,14 +2,18 @@
 // ignore_for_file: must_be_immutable, file_names, duplicate_ignore
 
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:provider/provider.dart';
+import 'package:reading_novel_mini_project/boxes.dart';
+import 'package:reading_novel_mini_project/models/favor.dart';
 
+import '../../service/providers/provider.dart';
 import '../ReadNovelScreen.dart';
 
 class WidgetBook extends StatefulWidget {
   final Size tmpt;
   String judul, gambar, sinopsis, genre;
   List novel;
-  bool fav;
   WidgetBook(
       {super.key,
       required this.tmpt,
@@ -17,7 +21,6 @@ class WidgetBook extends StatefulWidget {
       required this.gambar,
       required this.judul,
       required this.novel,
-      required this.fav,
       required this.genre});
 
   @override
@@ -25,6 +28,13 @@ class WidgetBook extends StatefulWidget {
 }
 
 class _WidgetBookState extends State<WidgetBook> {
+  @override
+  void dispose() {
+    Hive.close();
+
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -79,7 +89,12 @@ class _WidgetBookState extends State<WidgetBook> {
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.transparent),
                     label: const Text("Add To Favorite"),
-                    onPressed: () {},
+                    onPressed: () async {
+                      final favor = Favorite(widget.judul, widget.sinopsis,
+                          widget.gambar, widget.genre, widget.novel);
+                      await Provider.of<Novels>(context, listen: false)
+                          .addFavorite(favor);
+                    },
                   ),
                 ],
               )),

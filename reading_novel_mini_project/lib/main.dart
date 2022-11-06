@@ -1,14 +1,20 @@
 // ignore_for_file: depend_on_referenced_packages
 
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:reading_novel_mini_project/screens/homepage.dart';
 import 'package:reading_novel_mini_project/service/database/mongodb.dart';
 import 'package:reading_novel_mini_project/service/providers/provider.dart';
 import 'package:provider/provider.dart';
 
+import 'models/favor.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding();
   await mongoDatabase.connect();
+  await Hive.initFlutter();
+  Hive.registerAdapter(FavoriteAdapter());
+  await Hive.openBox<Favorite>('favorite');
   runApp(const MyApp());
 }
 

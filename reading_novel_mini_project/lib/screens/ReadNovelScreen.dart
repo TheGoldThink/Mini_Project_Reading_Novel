@@ -45,6 +45,21 @@ class _ReadNovelState extends State<ReadNovel> {
                     ),
                   ),
                 ),
+                ElevatedButton.icon(
+                    onPressed: () {
+                      setState(() {
+                        Navigator.pop(context);
+                      });
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.black87,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(
+                            30), //change border radius of this beautiful button thanks to BorderRadius.circular function
+                      ),
+                    ),
+                    icon: Icon(Icons.home),
+                    label: Text("Back to Tittle")),
                 Row(
                   children: <Widget>[
                     ElevatedButton.icon(

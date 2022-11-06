@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:hive/hive.dart';
+import 'package:reading_novel_mini_project/boxes.dart';
+import '../../models/favor.dart';
 import '../../models/novelModeldata.dart';
 import '../database/mongodb.dart';
 import '../../models/user_model.dart';
@@ -55,6 +58,15 @@ class Novels with ChangeNotifier {
       await mongoDatabase.update(u);
       final index = dataUser.indexWhere((element) => element.id == u.id);
       dataUser[index] = u;
+      notifyListeners();
+    }
+  }
+
+  addFavorite(Favorite u) async {
+    if (u != 0) {
+      final box = Boxes.getTransactions();
+      box.add(u);
+      await Hive.openBox<Favorite>('favorite');
       notifyListeners();
     }
   }

@@ -25,7 +25,7 @@ class _novelViewState extends State<novelViewModel> {
           )
         : isError
             ? const Center(
-                child: Text("Gagal Load T_T"),
+                child: Text("Error Check Your Connection"),
               )
             : MasonryGridView.count(
                 crossAxisCount: 2,

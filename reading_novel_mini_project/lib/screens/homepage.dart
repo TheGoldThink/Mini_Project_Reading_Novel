@@ -2,9 +2,12 @@
 
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:reading_novel_mini_project/screens/ProfileScreens.dart';
 import 'package:reading_novel_mini_project/screens/favorite_screens.dart';
 import 'package:reading_novel_mini_project/screens/widgets/viewModel.dart';
+
+import '../models/favor.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -15,6 +18,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int index = 1;
+  var box = Hive.openBox<Favorite>('favorite');
+
   final navigationkey = GlobalKey<CurvedNavigationBarState>();
   final items = <Widget>[
     const Icon(
@@ -37,6 +42,11 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
   @override
   Widget build(BuildContext context) {
+    if (box == null) {
+      return Center(
+        child: CircularProgressIndicator(),
+      );
+    }
     return Scaffold(
       extendBody: true,
       key: navigationkey,

@@ -48,7 +48,6 @@ class _DaftarNovelState extends State<DaftarNovel> {
             context,
             MaterialPageRoute(
               builder: (context) => DetailView(
-                  fav: widget.novell.favorite,
                   gambar: widget.novell.image,
                   nama: widget.novell.name,
                   sinopsis: widget.novell.sinopsis,
