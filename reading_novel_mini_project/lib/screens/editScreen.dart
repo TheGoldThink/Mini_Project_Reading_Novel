@@ -127,9 +127,7 @@ class _editScreenState extends State<editScreen> {
                   TextFormField(
                     // Handles Form Validation
                     validator: (value) {
-                      if (value == null ||
-                          value.isEmpty ||
-                          value.length > 200) {
+                      if (value == null || value.isEmpty || value.length > 50) {
                         return 'Please describe yourself but keep it under 200 characters.';
                       }
                       return null;

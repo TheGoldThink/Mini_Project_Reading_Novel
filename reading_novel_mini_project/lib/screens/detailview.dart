@@ -34,7 +34,7 @@ class _DetailViewState extends State<DetailView> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.black12,
         elevation: 0,
       ),
       body: SingleChildScrollView(

@@ -57,15 +57,6 @@ class _ProfileScreensState extends State<ProfileScreens> {
                                   icon: const Icon(Icons.edit),
                                   color: Colors.black,
                                 ),
-                                IconButton(
-                                    onPressed: (() {
-                                      Navigator.pushReplacement(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (BuildContext context) =>
-                                                  const HomeScreen()));
-                                    }),
-                                    icon: const Icon(Icons.refresh))
                               ],
                             ),
                             SizedBox(

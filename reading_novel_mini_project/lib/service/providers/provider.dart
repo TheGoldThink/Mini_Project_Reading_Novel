@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import '../../models/novelModeldata.dart';
 import '../database/mongodb.dart';
@@ -52,6 +53,9 @@ class Novels with ChangeNotifier {
   updateuser(UserModel u) async {
     if (u != 0) {
       await mongoDatabase.update(u);
+      final index = dataUser.indexWhere((element) => element.id == u.id);
+      dataUser[index] = u;
+      notifyListeners();
     }
   }
 }
