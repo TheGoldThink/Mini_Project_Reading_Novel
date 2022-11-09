@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reading_novel_mini_project/models/user_model.dart';
-import 'package:reading_novel_mini_project/service/providers/provider.dart';
+import 'package:reading_novel_mini_project/service/providers/profileProvider.dart';
 
 class editScreen extends StatefulWidget {
   const editScreen({
@@ -20,6 +20,7 @@ class _editScreenState extends State<editScreen> {
   TextEditingController email = TextEditingController();
   TextEditingController lname = TextEditingController();
   TextEditingController about = TextEditingController();
+  late List<String> bambang;
   UserModel? updateuser;
   final formKey = GlobalKey<FormState>();
 
@@ -42,6 +43,7 @@ class _editScreenState extends State<editScreen> {
       email.text = updateuser!.email;
       phone.text = updateuser!.phone;
       about.text = updateuser!.about;
+      bambang = updateuser!.favorite;
     }
     return Scaffold(
         extendBodyBehindAppBar: true,
@@ -198,12 +200,14 @@ class _editScreenState extends State<editScreen> {
   updateData(UserModel user) async {
     formKey.currentState!.save();
     final u = UserModel(
-        id: user.id,
-        fName: fname.text,
-        lName: lname.text,
-        email: email.text,
-        phone: phone.text,
-        about: about.text);
-    await Provider.of<Novels>(context, listen: false).updateuser(u);
+      id: user.id,
+      fName: fname.text,
+      lName: lname.text,
+      email: email.text,
+      phone: phone.text,
+      about: about.text,
+      favorite: bambang,
+    );
+    await Provider.of<UserProviders>(context, listen: false).updateuser(u);
   }
 }

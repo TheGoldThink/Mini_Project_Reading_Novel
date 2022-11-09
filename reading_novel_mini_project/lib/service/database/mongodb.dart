@@ -44,6 +44,7 @@ class mongoDatabase {
     u["email"] = user.email;
     u["phone"] = user.phone;
     u["about"] = user.about;
+    u["favorite"] = user.favorite;
     await datauser.save(u);
   }
 }

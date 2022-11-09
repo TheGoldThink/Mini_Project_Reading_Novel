@@ -3,14 +3,14 @@
 import 'package:mongo_dart/mongo_dart.dart';
 
 class UserModel {
-  UserModel({
-    required this.id,
-    required this.fName,
-    required this.lName,
-    required this.email,
-    required this.phone,
-    required this.about,
-  });
+  UserModel(
+      {required this.id,
+      required this.fName,
+      required this.lName,
+      required this.email,
+      required this.phone,
+      required this.about,
+      required this.favorite});
 
   ObjectId id;
   String fName;
@@ -18,6 +18,7 @@ class UserModel {
   String email;
   String phone;
   String about;
+  List<String> favorite;
 
   factory UserModel.fromMap(Map<String, dynamic> map) => UserModel(
         id: map["_id"],
@@ -26,6 +27,7 @@ class UserModel {
         email: map["email"],
         phone: map["phone"],
         about: map["about"],
+        favorite: List<String>.from(map["favorite"].map((x) => x)),
       );
 
   Map<String, dynamic> toMap() => {
@@ -35,5 +37,6 @@ class UserModel {
         "email": email,
         "phone": phone,
         "about": about,
+        "favorite": List<dynamic>.from(favorite.map((x) => x)),
       };
 }

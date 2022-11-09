@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:reading_novel_mini_project/screens/homepage.dart';
 import 'package:reading_novel_mini_project/service/database/mongodb.dart';
+import 'package:reading_novel_mini_project/service/providers/profileProvider.dart';
 import 'package:reading_novel_mini_project/service/providers/provider.dart';
 import 'package:provider/provider.dart';
 
@@ -31,7 +32,8 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MultiProvider(
         providers: [
-          ChangeNotifierProvider(create: (context) => Novels()),
+          ChangeNotifierProvider(create: (context) => NovelProvider()),
+          ChangeNotifierProvider(create: (context) => UserProviders())
         ],
         child: const MaterialApp(
           title: 'Mini Project',

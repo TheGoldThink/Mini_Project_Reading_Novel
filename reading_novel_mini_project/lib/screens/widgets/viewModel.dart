@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:reading_novel_mini_project/screens/widgets/novel.dart';
+import 'package:reading_novel_mini_project/service/providers/profileProvider.dart';
 import '../../service/providers/provider.dart';
 import 'package:provider/provider.dart';
 
@@ -16,16 +17,19 @@ class novelViewModel extends StatefulWidget {
 class _novelViewState extends State<novelViewModel> {
   @override
   Widget build(BuildContext context) {
-    final isloading = Provider.of<Novels>(context).state == novelState.loading;
-    final isError = Provider.of<Novels>(context).state == novelState.error;
-    List novelss = Provider.of<Novels>(context).isinovelnya;
+    final isloading =
+        Provider.of<NovelProvider>(context).state == novelState.loading;
+    final isError =
+        Provider.of<NovelProvider>(context).state == novelState.error;
+    List novelss = Provider.of<NovelProvider>(context).isinovelnya;
+    List datauser = Provider.of<UserProviders>(context).isiProfile;
     return isloading
         ? const Center(
             child: CircularProgressIndicator(),
           )
-        : isError
+        : isError || novelss.isEmpty
             ? const Center(
-                child: Text("Error Check Your Connection"),
+                child: Text("Saat ini anda sedang dalam mode offline"),
               )
             : MasonryGridView.count(
                 crossAxisCount: 2,
@@ -34,7 +38,10 @@ class _novelViewState extends State<novelViewModel> {
                 mainAxisSpacing: 8,
                 itemCount: novelss.length,
                 itemBuilder: ((context, index) {
-                  return DaftarNovel(novell: novelss[index]);
+                  return DaftarNovel(
+                    novell: novelss[index],
+                    user: datauser[0],
+                  );
                 }));
   }
 }

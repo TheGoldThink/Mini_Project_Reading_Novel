@@ -9,7 +9,6 @@ class IsiNovel {
   String image;
   List<List<String>> ch;
   String genre;
-  bool favorite;
 
   IsiNovel({
     required this.id,
@@ -18,7 +17,6 @@ class IsiNovel {
     required this.image,
     required this.ch,
     required this.genre,
-    required this.favorite,
   });
 
   factory IsiNovel.fromMap(Map<String, dynamic> map) => IsiNovel(
@@ -29,7 +27,6 @@ class IsiNovel {
         ch: List<List<String>>.from(
             map["ch"].map((x) => List<String>.from(x.map((x) => x)))),
         genre: map["genre"],
-        favorite: map["favorite"],
       );
 
   Map<String, dynamic> toMap() => {
@@ -40,6 +37,5 @@ class IsiNovel {
         "ch": List<dynamic>.from(
             ch.map((x) => List<dynamic>.from(x.map((x) => x)))),
         "genre": genre,
-        "favorite": favorite,
       };
 }

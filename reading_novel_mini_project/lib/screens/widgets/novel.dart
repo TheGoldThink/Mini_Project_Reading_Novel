@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:reading_novel_mini_project/models/user_model.dart';
 import 'package:reading_novel_mini_project/screens/detailview.dart';
 import '../../models/novelModeldata.dart';
 
 class DaftarNovel extends StatefulWidget {
   final IsiNovel novell;
-  const DaftarNovel({super.key, required this.novell});
+  final UserModel user;
+  const DaftarNovel({super.key, required this.novell, required this.user});
 
   @override
   State<DaftarNovel> createState() => _DaftarNovelState();
@@ -48,11 +50,13 @@ class _DaftarNovelState extends State<DaftarNovel> {
             context,
             MaterialPageRoute(
               builder: (context) => DetailView(
-                  gambar: widget.novell.image,
-                  nama: widget.novell.name,
-                  sinopsis: widget.novell.sinopsis,
-                  genre: widget.novell.genre,
-                  chapter: widget.novell.ch),
+                gambar: widget.novell.image,
+                nama: widget.novell.name,
+                sinopsis: widget.novell.sinopsis,
+                genre: widget.novell.genre,
+                chapter: widget.novell.ch,
+                user: widget.user,
+              ),
             ));
       },
     );

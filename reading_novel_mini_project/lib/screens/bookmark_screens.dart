@@ -52,11 +52,23 @@ class _FavoriteScreensState extends State<FavoriteScreens> {
                       height: 20,
                     ),
                     const Text(
-                      'Your\nFavorite',
+                      'Your\nBookmark',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 34,
+                        fontFamily: 'Nisebuschgardens',
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    const Text(
+                      "Disini kamu bisa membaca secara offline",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 20,
                         fontFamily: 'Nisebuschgardens',
                       ),
                     ),

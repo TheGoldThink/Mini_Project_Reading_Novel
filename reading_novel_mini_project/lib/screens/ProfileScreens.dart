@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reading_novel_mini_project/screens/editScreen.dart';
-import 'package:reading_novel_mini_project/service/providers/provider.dart';
+import 'package:reading_novel_mini_project/service/providers/profileProvider.dart';
 
 class ProfileScreens extends StatefulWidget {
   const ProfileScreens({super.key});
@@ -15,9 +15,12 @@ class ProfileScreens extends StatefulWidget {
 class _ProfileScreensState extends State<ProfileScreens> {
   @override
   Widget build(BuildContext context) {
-    final isloading = Provider.of<Novels>(context).state == novelState.loading;
-    final isError = Provider.of<Novels>(context).state == novelState.error;
-    List profile = Provider.of<Novels>(context).isiProfile;
+    final isloading =
+        Provider.of<UserProviders>(context).state == UserState.loading;
+    final isError =
+        Provider.of<UserProviders>(context).state == UserState.error;
+    List profile = Provider.of<UserProviders>(context).isiProfile;
+
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
 
@@ -25,9 +28,9 @@ class _ProfileScreensState extends State<ProfileScreens> {
         ? const Center(
             child: CircularProgressIndicator(),
           )
-        : isError
+        : isError || profile.isEmpty
             ? const Center(
-                child: Text("Gagal Load Profile"),
+                child: Text("Saat ini anda sedang dalam mode offline"),
               )
             : Stack(
                 fit: StackFit.expand,

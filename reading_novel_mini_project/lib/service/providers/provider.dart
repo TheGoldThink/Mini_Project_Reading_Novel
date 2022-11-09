@@ -13,12 +13,11 @@ enum novelState {
   error,
 }
 
-class Novels with ChangeNotifier {
+class NovelProvider with ChangeNotifier {
   novelState _state = novelState.none;
   List<IsiNovel> datanov = [];
-  List<UserModel> dataUser = [];
 
-  Novels() {
+  NovelProvider() {
     _fetchnovel();
   }
 
@@ -32,7 +31,6 @@ class Novels with ChangeNotifier {
   void _fetchnovel() async {
     changeState(novelState.loading);
     try {
-      dataUser = await mongoDatabase.getuser();
       datanov = await mongoDatabase.getNovel();
 
       changeState(novelState.none);
@@ -41,24 +39,12 @@ class Novels with ChangeNotifier {
     }
   }
 
-  List<UserModel> get isiProfile {
-    var temp = [...dataUser];
-    return temp;
-  }
-
   List<IsiNovel> get isinovelnya {
     var temp = [...datanov];
     temp.sort(
       (a, b) => a.name.compareTo(b.name),
     );
     return temp;
-  }
-
-  updateuser(UserModel u) async {
-    await mongoDatabase.update(u);
-    final index = dataUser.indexWhere((element) => element.id == u.id);
-    dataUser[index] = u;
-    notifyListeners();
   }
 
   addFavorite(Favorite u) async {

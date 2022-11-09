@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:reading_novel_mini_project/models/user_model.dart';
 import 'package:reading_novel_mini_project/screens/widgets/WidgetBook.dart';
 import 'package:reading_novel_mini_project/screens/widgets/WidgetChapter.dart';
 
@@ -12,14 +13,15 @@ import '../models/favor.dart';
 class DetailView extends StatefulWidget {
   final String? gambar, sinopsis, nama, genre;
   final List chapter;
-
-  const DetailView({
+  UserModel? user;
+  DetailView({
     super.key,
     required this.gambar,
     required this.nama,
     required this.sinopsis,
     required this.genre,
     required this.chapter,
+    this.user,
   });
 
   @override
@@ -71,12 +73,14 @@ class _DetailViewState extends State<DetailView> {
                             ),
                           ),
                           child: WidgetBook(
-                              genre: widget.genre!,
-                              sinopsis: widget.sinopsis!,
-                              novel: widget.chapter,
-                              tmpt: size,
-                              gambar: widget.gambar!,
-                              judul: widget.nama!),
+                            genre: widget.genre!,
+                            sinopsis: widget.sinopsis!,
+                            novel: widget.chapter,
+                            tmpt: size,
+                            gambar: widget.gambar!,
+                            judul: widget.nama!,
+                            user: widget.user,
+                          ),
                         ),
                       ],
                     ),
